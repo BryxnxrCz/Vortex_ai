@@ -65,7 +65,7 @@
             height: 120px;
             background: #13131c;
             border: 2px solid #5e9bff;
-            color: #5e9bff; /* Controla el color del micrófono nativamente */
+            color: #5e9bff;
             border-radius: 50%;
             box-shadow: 0 0 30px rgba(94, 155, 255, 0.2);
             display: flex;
@@ -199,7 +199,7 @@
             <div class="feature-item"><span class="feature-icon">✓</span> Control nativo preciso de hardware y volumen por comandos de voz.</div>
         </div>
 
-        <a href="<a href="https://github.com/su-usuario/vortex-ai/releases/download/v1.0.0/vortex_ai.exe" class="btn-download" download="vortex_ai.exe">DESCARGAR PARA WINDOWS</a>" class="btn-download" download="vortex_ai.exe">DESCARGAR PARA WINDOWS</a>
+        <a href="https://github.com/bryxnircz/Vortex_ai/releases/download/v1.0.0/vortex_ai.exe" class="btn-download" download="vortex_ai.exe">DESCARGAR PARA WINDOWS</a>
         
         <p class="version-tag">COMPILACIÓN v1.0.0 // NATIVO DE 64-BITS</p>
     </div>
@@ -208,10 +208,7 @@
         const core = document.getElementById('vortexCore');
 
         core.addEventListener('click', () => {
-            // Añade la clase que vuelve el anillo y el icono amarillos al mismo tiempo
             core.classList.add('processing');
-            
-            // Remueve la clase para volver al azul original en 1.2 segundos
             setTimeout(() => {
                 core.classList.remove('processing');
             }, 1200);
