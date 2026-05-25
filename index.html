@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vortex AI — Asistente de Escritorio Avanzado</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+        }
+
+        body {
+            background-color: #0d0d12;
+            color: #e2e8f0;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .background-grid {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(#1e2030 1px, transparent 1px);
+            background-size: 24px 24px;
+            opacity: 0.3;
+            z-index: -1;
+        }
+
+        .container {
+            text-align: center;
+            max-width: 600px;
+            padding: 40px 20px;
+            z-index: 10;
+        }
+
+        /* Contenedor del Anillo */
+        .orb-container {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 30px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .orb-ring {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 2px dashed #1e2030;
+        }
+
+        /* NÚCLEO CON ANIMACIÓN DE COLOR INTEGRADA */
+        .orb-core {
+            width: 120px;
+            height: 120px;
+            background: #13131c;
+            border: 2px solid #5e9bff;
+            color: #5e9bff; /* Controla el color del micrófono nativamente */
+            border-radius: 50%;
+            box-shadow: 0 0 30px rgba(94, 155, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .orb-core:hover {
+            border-color: #3dffa0;
+            color: #3dffa0;
+            box-shadow: 0 0 40px rgba(61, 255, 160, 0.4);
+            transform: scale(1.05);
+        }
+
+        /* Estado activo cuando se hace clic */
+        .orb-core.processing {
+            border-color: #fbbf24 !important;
+            color: #fbbf24 !important;
+            box-shadow: 0 0 40px rgba(251, 191, 36, 0.6) !important;
+        }
+
+        .orb-glow-dots {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            border: 2px solid transparent;
+            border-top: 2px solid #5e9bff;
+            border-radius: 50%;
+            animation: spin 2s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            letter-spacing: 5px;
+            margin-bottom: 10px;
+            color: #ffffff;
+        }
+
+        .subtitle {
+            color: #8892b0;
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+            font-weight: 400;
+        }
+
+        .features {
+            background: #13131c;
+            border: 1px solid #1e2030;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 40px;
+            text-align: left;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+            font-size: 0.95rem;
+            color: #e2e8f0;
+        }
+
+        .feature-item:last-child { margin-bottom: 0; }
+
+        .feature-icon {
+            color: #5e9bff;
+            margin-right: 12px;
+            font-weight: bold;
+        }
+
+        .btn-download {
+            display: inline-block;
+            background: #5e9bff;
+            color: #0d0d12;
+            padding: 16px 40px;
+            font-size: 1rem;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 30px;
+            letter-spacing: 1px;
+            box-shadow: 0 10px 20px rgba(94, 155, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .btn-download:hover {
+            background: #3dffa0;
+            box-shadow: 0 10px 25px rgba(61, 255, 160, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .version-tag {
+            margin-top: 15px;
+            font-size: 0.8rem;
+            color: #3a3f5c;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="background-grid"></div>
+
+    <div class="container">
+        <div class="orb-container">
+            <div class="orb-ring"></div>
+            <div class="orb-glow-dots"></div>
+            <div id="vortexCore" class="orb-core">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
+                    <path d="M19 10v1a7 7 0 0 1-14 0v-1"/>
+                    <line x1="12" x2="12" y1="19" y2="22"/>
+                </svg>
+            </div>
+        </div>
+
+        <h1>VORTEX AI</h1>
+        <p class="subtitle">Su sistema operativo bajo control por voz. Privado, local y veloz.</p>
+
+        <div class="features">
+            <div class="feature-item"><span class="feature-icon">✓</span> Automatización de aplicaciones del ecosistema (Spotify, Chrome, VS Code).</div>
+            <div class="feature-item"><span class="feature-icon">✓</span> Núcleo conversacional local impulsado por Ollama Llama 3.2.</div>
+            <div class="feature-item"><span class="feature-icon">✓</span> Interfaz compacta HUD con renderizado reactivo del espectro de audio.</div>
+            <div class="feature-item"><span class="feature-icon">✓</span> Control nativo preciso de hardware y volumen por comandos de voz.</div>
+        </div>
+
+        <a href="vortex_ai.exe" class="btn-download" download="vortex_ai.exe">DESCARGAR PARA WINDOWS</a>
+        
+        <p class="version-tag">COMPILACIÓN v1.0.0 // NATIVO DE 64-BITS</p>
+    </div>
+
+    <script>
+        const core = document.getElementById('vortexCore');
+
+        core.addEventListener('click', () => {
+            // Añade la clase que vuelve el anillo y el icono amarillos al mismo tiempo
+            core.classList.add('processing');
+            
+            // Remueve la clase para volver al azul original en 1.2 segundos
+            setTimeout(() => {
+                core.classList.remove('processing');
+            }, 1200);
+        });
+    </script>
+</body>
+</html>
